@@ -1190,7 +1190,18 @@ namespace Flurl.Http
 		public static IFlurlRequest WithClient(this string url, IFlurlClient client) {
 			return new FlurlRequest(url).WithClient(client);
 		}
-		
+
+
+		/// <summary>
+		/// Creates a new FluralRequest and sets the WebProxy.
+		/// </summary>
+		/// <param name="uri"><see cref="Uri"></see></param>
+		/// <param name="webproxy"><see cref="IWebProxy"></see></param>
+		/// <returns><see cref="IFlurlRequest"></see></returns>
+		public static IFlurlRequest WithProxy(this Uri uri, IWebProxy webproxy) {
+			return new FlurlRequest(uri).WithProxy(webproxy);
+		}
+
 		/// <summary>
 		/// Creates a new FlurlRequest and asynchronously downloads a file.
 		/// </summary>
@@ -1611,7 +1622,8 @@ namespace Flurl.Http
 		public static IFlurlRequest WithTimeout(this Uri uri, int seconds) {
 			return new FlurlRequest(uri).WithTimeout(seconds);
 		}
-		
+
+
 		/// <summary>
 		/// Creates a new FlurlRequest and adds a pattern representing an HTTP status code or range of codes which (in addition to 2xx) will NOT result in a FlurlHttpException being thrown.
 		/// </summary>
@@ -1650,7 +1662,8 @@ namespace Flurl.Http
 		public static IFlurlRequest WithClient(this Uri uri, IFlurlClient client) {
 			return new FlurlRequest(uri).WithClient(client);
 		}
-		
+
+
 		/// <summary>
 		/// Creates a new FlurlRequest and asynchronously downloads a file.
 		/// </summary>

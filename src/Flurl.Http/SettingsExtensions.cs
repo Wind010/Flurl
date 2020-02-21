@@ -44,6 +44,18 @@ namespace Flurl.Http
 		}
 
 		/// <summary>
+		/// Sets the WebProxy for this IFlurlRequest or all requests made with this IFlurlClient.
+		/// </summary>
+		/// <param name="request">The IFlurlClient or IFlurlRequest.</param>
+		/// <param name="webProxy"></param>
+		/// <returns>A new IFlurlRequest to use with WebProxy defined.</returns>
+		public static IFlurlRequest WithProxy(this IFlurlRequest request, IWebProxy webProxy) {
+			request.Settings.WebProxy = webProxy;
+			request.Settings.HttpClientFactory = new ProxyHttpClientFactory(webProxy);
+			return request;
+		}
+
+		/// <summary>
 		/// Sets the timeout for this IFlurlRequest or all requests made with this IFlurlClient.
 		/// </summary>
 		/// <param name="obj">The IFlurlClient or IFlurlRequest.</param>
@@ -64,6 +76,7 @@ namespace Flurl.Http
 			obj.Settings.Timeout = TimeSpan.FromSeconds(seconds);
 			return obj;
 		}
+
 
 		/// <summary>
 		/// Adds a pattern representing an HTTP status code or range of codes which (in addition to 2xx) will NOT result in a FlurlHttpException being thrown.

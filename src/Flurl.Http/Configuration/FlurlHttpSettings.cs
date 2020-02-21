@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Reflection;
+using System.Net;
 using System.Threading.Tasks;
 using System.Runtime.CompilerServices;
 using Flurl.Http.Testing;
@@ -38,6 +37,14 @@ namespace Flurl.Http.Configuration
 		/// </summary>
 		public TimeSpan? Timeout {
 			get => Get<TimeSpan?>();
+			set => Set(value);
+		}
+
+		/// <summary>
+		/// Gets or sets the WebProxy.
+		/// </summary>
+		public IWebProxy WebProxy {
+			get => Get<IWebProxy>();
 			set => Set(value);
 		}
 
@@ -126,6 +133,16 @@ namespace Flurl.Http.Configuration
 		}
 
 		/// <summary>
+		/// Gets or sets a factory used to create the HttpClient and HttpMessageHandler used for HTTP calls.
+		/// Whenever possible, custom factory implementations should inherit from DefaultHttpClientFactory,
+		/// only override the method(s) needed, call the base method, and modify the result.
+		/// </summary>
+		public IHttpClientFactory HttpClientFactory {
+			get => Get<IHttpClientFactory>();
+			set => Set(value);
+		}
+
+		/// <summary>
 		/// Resets all overridden settings to their default values. For example, on a FlurlRequest,
 		/// all settings are reset to FlurlClient-level settings.
 		/// </summary>
@@ -165,16 +182,6 @@ namespace Flurl.Http.Configuration
 		/// </summary>
 		public TimeSpan? ConnectionLeaseTimeout {
 			get => Get<TimeSpan?>();
-			set => Set(value);
-		}
-
-		/// <summary>
-		/// Gets or sets a factory used to create the HttpClient and HttpMessageHandler used for HTTP calls.
-		/// Whenever possible, custom factory implementations should inherit from DefaultHttpClientFactory,
-		/// only override the method(s) needed, call the base method, and modify the result.
-		/// </summary>
-		public IHttpClientFactory HttpClientFactory {
-			get => Get<IHttpClientFactory>();
 			set => Set(value);
 		}
 	}
