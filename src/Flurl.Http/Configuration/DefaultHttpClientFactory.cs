@@ -34,12 +34,25 @@ namespace Flurl.Http.Configuration
 				UseCookies = false,
 				AllowAutoRedirect = false
 			};
-			if (httpClientHandler.SupportsAutomaticDecompression) {
+
+			ConfigureAutomaticDecompression(httpClientHandler);
+
+			return httpClientHandler;
+		}
+
+		/// <summary>
+		/// If automatic decompression is supported set the decompression method to Gzip or Deflate.
+		/// </summary>
+		/// <param name="httpClientHandler"><see cref="HttpClientHandler"></see></param>
+		protected void ConfigureAutomaticDecompression(HttpClientHandler httpClientHandler)
+		{
+			if (httpClientHandler.SupportsAutomaticDecompression)
+			{
 				// #266
 				// deflate not working? see #474
 				httpClientHandler.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
 			}
-			return httpClientHandler;
 		}
+
 	}
 }
